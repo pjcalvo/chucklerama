@@ -10,5 +10,5 @@ var HomePage string
 //go:embed new-joke.html
 var NewJokePage string
 
-//go:embed new-joke.html
+//go:embed terms.html
 var TermsPage string

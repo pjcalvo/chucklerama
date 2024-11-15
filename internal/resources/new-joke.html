@@ -69,22 +69,23 @@
             event.preventDefault();
             const joke = document.getElementById('jokeInput').value;
 
-            // Simulate sending the joke to an endpoint
-            console.log('Joke submitted:', joke);
-
             // Example fetch (uncomment if you have an endpoint)
-            /*
-            fetch('https://your-endpoint.com/submit-joke', {
+            
+            fetch('/jokes', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ joke })
+                body: JSON.stringify({ "joke": joke })
             })
             .then(response => response.json())
-            .then(data => console.log('Success:', data))
-            .catch((error) => console.error('Error:', error));
-            */
+            .then(data => 
+                console.log('Success:', data)
+            )
+            .catch((error) => 
+                alert('Error:', error)
+            );
+            
 
             alert('Joke submitted!');
             document.getElementById('jokeForm').reset();
