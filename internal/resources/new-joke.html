@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Your Joke - Chuklerama</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+        {
+            "imports": {
+                "@material/web/": "https://esm.run/@material/web/"
+            }
+        }
+    </script>
+    <script type="module">
+        import '@material/web/button/filled-button.js';
+        import '@material/web/textfield/filled-text-field.js';
+        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Roboto', sans-serif;
+            box-sizing: border-box;
+        }
+
+        .form-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+
+        md-filled-text-field {
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        md-filled-button {
+            background-color: #6200ee;
+            color: #ffffff;
+            font-size: 16px;
+            padding: 10px 20px;
+        }
+
+        md-filled-button:hover {
+            background-color: #3700b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-section">
+        <h1 class="md-typescale-display-medium">Submit Your Joke</h1>
+        <form id="jokeForm" onsubmit="submitJoke(event)">
+            <md-filled-text-field id="jokeInput" label="Your Joke" textarea rows="4" required></md-filled-text-field>
+            <md-filled-button type="submit">Submit</md-filled-button>
+        </form>
+    </div>
+
+    <script>
+        function submitJoke(event) {
+            event.preventDefault();
+            const joke = document.getElementById('jokeInput').value;
+
+            // Simulate sending the joke to an endpoint
+            console.log('Joke submitted:', joke);
+
+            // Example fetch (uncomment if you have an endpoint)
+            /*
+            fetch('https://your-endpoint.com/submit-joke', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ joke })
+            })
+            .then(response => response.json())
+            .then(data => console.log('Success:', data))
+            .catch((error) => console.error('Error:', error));
+            */
+
+            alert('Joke submitted!');
+            document.getElementById('jokeForm').reset();
+        }
+    </script>
+</body>
+</html>
