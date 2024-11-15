@@ -12,6 +12,7 @@ import (
 
 func serveHtml(resource string) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
+		slog.Info("Serving HTML", slog.Any("path", r.URL.Path))
 		w.Header().Set("Content-Type", "text/html")
 		w.WriteHeader(http.StatusOK)
 		fmt.Fprint(w, resource)
@@ -29,14 +30,19 @@ type NewJoke struct {
 }
 
 func handleNewJoke(w http.ResponseWriter, r *http.Request) {
+	slog.Info("New Joke Request")
 	var joke NewJoke
-	err := json.NewEncoder(w).Encode(&joke)
+	defer r.Body.Close()
+	err := json.NewDecoder(r.Body).Decode(&joke)
 	if err != nil {
+		slog.Error("Error encoding joke", slog.String("error", err.Error()))
 		w.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprint(w, "error encoding joke %w", err)
+		return
 	}
 	slog.Info("New Joke", slog.Any("joke", joke))
 	w.WriteHeader(http.StatusCreated)
+	w.Write([]byte("Joke Created"))
 }
 
 func main() {
@@ -45,10 +51,11 @@ func main() {
 	handler.HandleFunc("GET /", serveHtml(resources.HomePage))
 	handler.HandleFunc("GET /new", serveHtml(resources.NewJokePage))
 	handler.HandleFunc("GET /terms", serveHtml(resources.TermsPage))
-	handler.Handle("", http.NotFoundHandler())
+	handler.HandleFunc("GET /thanks", serveHtml(resources.ThanksPage))
+	// handler.Handle("", http.NotFoundHandler())
 
 	// api routes
-	http.HandleFunc("POST /jokes", handleNewJoke)
+	handler.HandleFunc("POST /jokes", handleNewJoke)
 
 	fmt.Println("Starting server on :8080")
 

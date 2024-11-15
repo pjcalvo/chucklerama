@@ -41,6 +41,7 @@
             margin-bottom: 20px;
             width: 100%;
             max-width: 400px;
+            resize: vertical;
         }
 
         md-filled-button {
@@ -59,7 +60,7 @@
     <div class="form-section">
         <h1 class="md-typescale-display-medium">Submit Your Joke</h1>
         <form id="jokeForm" onsubmit="submitJoke(event)">
-            <md-filled-text-field id="jokeInput" label="Your Joke" textarea rows="4" required></md-filled-text-field>
+            <md-filled-text-field id="jokeInput" label="Your Joke" type=textarea rows="4" required></md-filled-text-field>
             <md-filled-button type="submit">Submit</md-filled-button>
         </form>
     </div>
@@ -69,8 +70,6 @@
             event.preventDefault();
             const joke = document.getElementById('jokeInput').value;
 
-            // Example fetch (uncomment if you have an endpoint)
-            
             fetch('/jokes', {
                 method: 'POST',
                 headers: {
@@ -79,16 +78,13 @@
                 body: JSON.stringify({ "joke": joke })
             })
             .then(response => response.json())
-            .then(data => 
-                console.log('Success:', data)
+            .then(() =>
+                console.log('Joke submitted!'), 
+                window.location.href = '/thanks'              
             )
-            .catch((error) => 
-                alert('Error:', error)
-            );
-            
-
-            alert('Joke submitted!');
-            document.getElementById('jokeForm').reset();
+            .catch((error) =>
+                console('Error:', error)
+            );            
         }
     </script>
 </body>

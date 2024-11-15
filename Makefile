@@ -3,3 +3,6 @@ install-fly:
 
 deploy:
 	fly deploy
+
+run:
+	go run cmd/main.go

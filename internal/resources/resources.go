@@ -12,3 +12,6 @@ var NewJokePage string
 
 //go:embed terms.html
 var TermsPage string
+
+//go:embed thanks.html
+var ThanksPage string
