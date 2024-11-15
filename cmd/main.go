@@ -17,7 +17,8 @@ func serveHtml(resource string) func(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", serveHtml(resources.HomePage))
-	http.HandleFunc("/new", serveHtml(resources.NewJoke))
+	http.HandleFunc("/new", serveHtml(resources.NewJokePage))
+	http.HandleFunc("/terms", serveHtml(resources.TermsPage))
 
 	fmt.Println("Starting server on :8080")
 	if err := http.ListenAndServe("0.0.0.0:8080", nil); err != nil {

@@ -8,4 +8,7 @@ import (
 var HomePage string
 
 //go:embed new-joke.html
-var NewJoke string
+var NewJokePage string
+
+//go:embed new-joke.html
+var TermsPage string
