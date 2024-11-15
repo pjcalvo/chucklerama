@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuklerama - Daily Jokes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+        {
+            "imports": {
+                "@material/web/": "https://esm.run/@material/web/"
+            }
+        }
+    </script>
+    <script type="module">
+        import '@material/web/button/filled-button.js';
+        import '@material/web/button/filled-tonal-button.js';
+        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Roboto', sans-serif;
+            box-sizing: border-box;
+        }
+
+        .main-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .links-section {
+            margin-top: 50px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .links-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .links-section li {
+            margin: 10px 0;
+        }
+
+        .links-section a {
+            text-decoration: none;
+            color: #6200ee;
+            font-weight: 500;
+        }
+
+        .links-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* Floating button styles */
+        md-filled-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            padding: 0;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #6200ee;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        md-filled-button:hover {
+            background-color: #3700b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-section">
+        <h1 class="md-typescale-display-medium">
+            Why did the ketchup go to school?<br/>
+        Because it wanted to ketchup on its studies!</h1>
+    </div>
+
+    <div id="links-section" class="links-section">
+        <ul>
+            <li><a href="#link1">Buy your own stickers and spread the jokes</a></li>
+            <li><a href="#link2">Terms and Conditions</a></li>
+            <li><a href="#link3">Submit your joke</a></li>
+        </ul>
+    </div>
+
+    <md-filled-button onclick="scrollToLinks()">⬇</md-filled-button>
+
+    <script>
+        function scrollToLinks() {
+            document.getElementById('links-section').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
